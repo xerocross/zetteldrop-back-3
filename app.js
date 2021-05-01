@@ -85,6 +85,45 @@ app.post('/b/zettel', (req , res ) => {
     }
 })
 
+app.post("/b/zettels", (req, res) => {
+    if (!isLoggedIn(req)) {
+        res.sendStatus(403);
+        return;
+    }
+    let username = req.session.user;
+    let queryText = req.body.queryString;
+    zettelDrop.userQuery(username,queryText).then((response) => {
+
+        res.json(response);
+    })
+    .catch(e => {
+        console.log(e);
+        res.sendStatus(500);
+    })
+});
+
+app.delete("/b/zettel/:zettelId", (req, res)=> {
+    if (!isLoggedIn(req)) {
+        res.sendStatus(403);
+        return;
+    }
+    let username = req.session.user;
+    let id = req.params.zettelId;
+    console.log("received request to delete zettle with ID ", id, "from user" + username);
+    zettelDrop.deleteZettel(username, id)
+    .then((response) => {
+        if (response.deleted) {
+            res.sendStatus(200);
+        } else {
+            res.status(400).send("no such zettel was deleted");
+        }
+    })
+    .catch(e => {
+        console.log(e);
+        res.sendStatus(500);
+    });
+});
+
 app.get("/b/zettel/:zettelId", (req, res) => {
     try {
         console.log("username", req.session.user)

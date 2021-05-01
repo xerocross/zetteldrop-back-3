@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node app.js"
+    "start": "node app.js"
   },
   "author": "Adam Cross",
   "license": "ISC",
@@ -15,5 +15,8 @@
     "fs": "0.0.1-security",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.7"
+  },
+  "devDependencies": {
+    "jasmine": "^3.7.0"
   }
 }

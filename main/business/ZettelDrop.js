@@ -1,6 +1,8 @@
 const User = require("../model/User");
 const Zettel = require("../model/Zettel");
 const { ErrorMessages } = require("./ErrorMessages")
+const { StringUtils } = require("../util/StringUtils")
+const { ZettelList } = require("./ZettelList")
 
 class ZettelDrop  {
     isLoggedIn () {
@@ -54,6 +56,75 @@ class ZettelDrop  {
     getNewZettelId() {
         return Date.now().toString() + this.getRand().toString();
     }
+
+
+    userQuery(username, queryString) {
+
+        let tags  = StringUtils.getHashtags(queryString);
+        console.log("tags", tags);
+        let zettels = [];
+        return new Promise ((resolve, reject) => {
+            Zettel.find({user : username},  (err, response) => {
+                if (err) {
+                    console.error(err);
+                    reject();
+                }
+                let zettelList = new ZettelList([]);
+                response.forEach((doc)=> {
+                    zettels.push({
+                        user : doc.user,
+                        id : doc.id,
+                        text : doc.text
+                    });
+
+
+                    zettelList = new ZettelList(zettels);
+                    tags.forEach((tag) => {
+                        zettelList = zettelList.filterByTag(tag);
+                    })
+
+
+                })
+                resolve(zettelList.zettels);
+            })
+        });
+        // let zettelList = new ZettelList(this.zettels);
+        
+
+
+        // zettelList = zettelList.filterByUser(username);
+        // tags.forEach(tag=> {
+        //     zettelList = zettelList.filterByTag(tag)
+        // })
+        // return zettelList.zettels;
+    }
+
+
+    deleteZettel(username, id) {
+        return new Promise((resolve, reject) => {
+            let query = {id: id, user: username}
+            Zettel.deleteOne(query, (err, response) => {
+                if (err) {
+                    console.error(err);
+                    reject();
+                }
+                if (response.deletedCount == 1) {
+                    resolve({
+                        deleted : true
+                    });
+                } else {
+                    resolve({
+                        deleted : false
+                    });
+                }
+            })
+            .catch(e =>{
+                console.log("unknown error ", e, "28968d3c-e855-4f70-bed8-a6bad1e11964")
+                reject();
+            })
+        });
+    }
+
 
     createNewZettel(username, zettelText) {
         try {
