@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const zettelSchema = new mongoose.Mongoose.Schema({
+const zettelSchema = new mongoose.Schema({
     id : String,
     user : String,
     text : String

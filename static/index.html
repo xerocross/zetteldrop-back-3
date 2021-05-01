@@ -1,0 +1,34 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>ZettelDrop Backend</title>
+
+
+</head>
+
+<body>
+    <h1>ZettelDrop</h1>
+    <p>
+        You have reached the backend services of ZettelDrop. This is not the location of the user interface.
+        Currently there is no website user interface. The only way to interact with the service is to use
+        a program like Postman that lets the user send GET and POST requests, etc.
+    </p>
+    <h2>post '/login'</h2>
+    <p>@bodyParam: username</p>
+    <p>@bodyParam: password</p>
+
+    <h2>post '/register'</h2>
+    <p>@bodyParam: username</p>
+    <p>@bodyParam: password</p>
+
+    <h2>post '/logout'</h2>
+    <p>destroy session</p>
+
+    <h2>get '/isloggedin'</h2>
+
+    <p>returns 'true' if logged in with session cookie, false otherwise</p>
+</body>
+</html>
