@@ -24,8 +24,8 @@
 
 <body>
     <div class = "container">
-
-    <h1>ZettelDrop</h1>
+        <h1>ZettelDrop</h1>
+    <!-- 
     <form>
         <div class="form-group">
 
@@ -35,7 +35,7 @@
             <button class="btn btn-primary">drop</button>
             <button class="btn btn-success">search</button>
         </div>
-    </form>
+    </form> -->
 
 
     <p>
@@ -43,27 +43,43 @@
         Currently there is no website user interface. The only way to interact with the service is to use
         a program like Postman that lets the user send GET and POST requests, etc.
     </p>
-    <h2>post '/login'</h2>
+    <h2>post '/b/login'</h2>
     <p>@bodyParam: username</p>
     <p>@bodyParam: password</p>
+    <p>Logs into existing user account.</p>
 
-    <h2>post '/register'</h2>
+    <h2>post '/b/register'</h2>
     <p>@bodyParam: username</p>
     <p>@bodyParam: password</p>
+    <p>Creates a new user account.</p>
 
-    <h2>post '/logout'</h2>
+    <h2>post '/b/logout'</h2>
     <p>destroy session</p>
 
-    <h2>get '/isloggedin'</h2>
-
+    <h2>get '/b/isloggedin'</h2>
     <p>returns 'true' if logged in with session cookie, false otherwise</p>
 
+    <h2>post '/b/zettel'</h2>
+    <p>@bodyParam: text</p>
+
+    <p>Creates a new zettel with the given text. Use #hashtags for tagging.</p>
+
+    <h2>get '/b/zettel/:id'</h2>
+
+    <p>Get Zettel with id :id for viewing.</p>
+
+    
+
+
+    <h2>post '/b/zettels'</h2>
+    <p>@bodyParam: queryString</p>
+
+    <p>Searches for user zettels matching by queryString using the main ZettelDrop business logic.</p>
+
+    <h2>Notes/ To-Do</h2>
+
+    <p>Note: it is not currently possible to edit an existing zettel.</p>
 
     </div>
-
-
-
-
-   
 </body>
 </html>
