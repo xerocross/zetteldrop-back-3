@@ -4,7 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const LocalConfig = require("./config/LocalConfig")
-const HerokuConfig = require("./config/herokuConfig")
+const HerokuConfig = require("./config/HerokuConfig")
 const ZettelDrop = require("./main/business/ZettelDrop").ZettelDrop
 const { ErrorMessages } = require("./main/business/ErrorMessages")
 
