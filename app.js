@@ -4,6 +4,7 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const LocalConfig = require("./config/LocalConfig")
+const HerokuConfig = require("./config/herokuConfig")
 const ZettelDrop = require("./main/business/ZettelDrop").ZettelDrop
 const { ErrorMessages } = require("./main/business/ErrorMessages")
 
@@ -11,6 +12,24 @@ const app = express()
 app.use(express.urlencoded({extended:false}));
 app.use(express.json({}));
 app.use(session({"secret" : "31efaea8-c74e-4896-b191-c86d343d8d2c"}));
+
+
+
+// setup configuration
+console.log("the environment is '" + process.env.NODE_ENV + "'");
+console.log("test", process.env.NODE_ENV == "local")
+let Config;
+if  (process.env.NODE_ENV == "local") {
+    console.log("setting config local");
+    Config = LocalConfig;
+} else {
+    Config = HerokuConfig;
+    console.log("setting config heroku");
+}
+console.log("config")
+    console.log(JSON.stringify(Config));
+
+
 
 const port = process.env.PORT || 3000
 let zettelDrop = new ZettelDrop();
@@ -196,7 +215,7 @@ function init() {
 try {
     
     console.log("making connection")
-    mongoose.connect(LocalConfig.mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
+    mongoose.connect(Config.mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
 

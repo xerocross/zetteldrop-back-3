@@ -88,15 +88,6 @@ class ZettelDrop  {
                 resolve(zettelList.zettels);
             })
         });
-        // let zettelList = new ZettelList(this.zettels);
-        
-
-
-        // zettelList = zettelList.filterByUser(username);
-        // tags.forEach(tag=> {
-        //     zettelList = zettelList.filterByTag(tag)
-        // })
-        // return zettelList.zettels;
     }
 
 

@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "set NODE_ENV=development&&node app.js",
+    "dev" : "",
+    "local" : "set NODE_ENV=local&&node app.js"
   },
   "author": "Adam Cross",
   "license": "ISC",

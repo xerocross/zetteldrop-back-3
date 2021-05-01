@@ -1,0 +1,1 @@
+exports.mongodb = process.env.MONGODB_URI;
