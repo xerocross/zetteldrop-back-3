@@ -40,7 +40,6 @@ app.post('/b/register', function(req, res) {
     zettelDrop.register(username, password)
     .then((result) => {
         if (result) {
-            let username = zettelDrop.user.username;
             req.session.user = username;
             res.send("Welcome, " + req.session.user + ".");
         } else {
